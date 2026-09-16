@@ -1,0 +1,7 @@
+Query,Total_Relevant,Retrieved_Relevant,Precision@5,Recall@5,First_Relevant_Rank,Reciprocal_Rank
+barbecue grill recipes,3,3,0.6,1.0,1,1.0
+medical image classification,1,1,0.2,1.0,1,1.0
+transformer language model,2,1,0.2,0.5,3,0.3333
+natural language processing,2,1,0.2,0.5,5,0.2
+python programming software,3,2,0.4,0.6667,1,1.0
+space telescope astronomy,3,3,0.6,1.0,1,1.0
