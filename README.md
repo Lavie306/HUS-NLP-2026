@@ -21,16 +21,25 @@ The repository is organized progressively by lab topics and experimental modules
 NLP/
 ├── README.MD                   # Tài liệu tổng quan toàn bộ kho lưu trữ
 ├── requirements.txt            # Danh sách các thư viện phụ thuộc của dự án
-└── Lab1/                       # Lab 01: From Text Processing to Search
-    ├── W1.pdf                  # Đề bài và hướng dẫn thực hành Lab 1
-    ├── c4-train...-30K.json # Tập ngữ liệu 30.000 documents trích từ C4
-    ├── implementation.py       # Triển khai thuật toán cốt lõi TF-IDF & Unit Tests (Phần 8)
-    ├── experiments.ipynb       # Notebook thực nghiệm phân tích Sparse Matrix (Phần 7)
-    ├── calculations.pdf         # Lời giải chi tiết các bài toán tính tay (Part B)
-    ├── prediction.pdf           # Dự đoán giả thuyết trước khi chạy thực nghiệm (Part C)
-    ├── results.csv             # Kết quả đo lường và đánh giá retrieval (Part H)
-    ├── reflection.pdf           # Báo cáo phản tư, phân tích lỗi & định hướng (Part 16)
-    └── Lab1.md               # Hướng dẫn chi tiết riêng cho Lab 1
+├── Lab1/                       # Lab 01: From Text Processing to Search
+│   ├── W1.pdf                  # Đề bài và hướng dẫn thực hành Lab 1
+│   ├── c4-train...-30K.json    # Tập ngữ liệu 30.000 documents trích từ C4
+│   ├── implementation.py       # Triển khai thuật toán cốt lõi TF-IDF & Unit Tests (Phần 8)
+│   ├── experiments.ipynb       # Notebook thực nghiệm phân tích Sparse Matrix (Phần 7, 9-13)
+│   ├── Calculations.pdf        # Lời giải chi tiết các bài toán tính tay (Part B)
+│   ├── Prediction.pdf          # Dự đoán giả thuyết trước khi chạy thực nghiệm (Part C)
+│   ├── results.csv             # Kết quả đo lường và đánh giá retrieval (Part H)
+│   └── Reflection.pdf          # Báo cáo phản tư, phân tích lỗi & định hướng (Part 16)
+└── Lab2/                       # Lab 02: Language Models (N-gram, Smoothing & Perplexity)
+    ├── W2.pdf                  # Đề bài và hướng dẫn thực hành Lab 2
+    ├── README.md               # Hướng dẫn chi tiết riêng cho Lab 2
+    ├── calculations.pdf         # Tính toán xác suất bằng tay (Unigram, Bigram, PPL, Laplace)
+    ├── prediction.pdf           # 5 dự đoán trước thực nghiệm (Prediction 1-5)
+    ├── ngram_lm.py             # Cốt lõi: NGramLanguageModel, MLE, Laplace, Log-prob
+    ├── experiments.ipynb       # Thực nghiệm C4: Thống kê Zipf, Perplexity, Next-Word, Ranking
+    ├── results.csv             # Bảng tổng hợp Perplexity trên Train, Validation, Test
+    ├── error_analysis.pdf       # Phân tích 2 ca dự đoán đúng & 2 ca dự đoán sai
+    └── reflection.pdf           # Báo cáo tổng kết 7 câu hỏi kết nối sang Neural LM
 ```
 
 ---
@@ -41,13 +50,19 @@ NLP/
 - **Chủ đề:** Text Processing, Sparse Vector Representations, TF-IDF và Document Search.
 - **Nội dung chính:**
   - Thực hiện tokenization, normalization, loại bỏ stopwords và tiền xử lý đầu vào.
-  - Tự cài đặt từ đầu (from scratch) các thành phần cốt lõi: Vocabulary Builder, Count Vector, Term Frequency (TF), Inverse Document Frequency (IDF), TF-IDF, và Cosine Similarity mà không dùng trực tiếp thư viện đen (black-box).
+  - Tự cài đặt từ đầu (from scratch) các thành phần cốt lõi: Vocabulary Builder, Count Vector, Term Frequency (TF), Inverse Document Frequency (IDF), TF-IDF, và Cosine Similarity.
   - Thí nghiệm khảo sát trên kho ngữ liệu thực tế gồm **30.000 văn bản tiếng Anh** từ tập dữ liệu C4.
-  - Đo lường và chứng minh tính chất ma trận thưa.
-  - Kiểm tra phân bố từ vựng (Top Document Frequency, Top IDF, Top TF-IDF).
-  - Phân tích hiện tượng khoảng cách từ vựng (**Vocabulary Mismatch Problem**) và động lực chuyển tiếp sang Dense Representations (Word Embeddings / Transformers).
+  - Xây dựng Document Search Engine, đánh giá Precision@5, Recall@5, MRR và phân tích hiện tượng **Vocabulary Mismatch Problem**.
 
-*(Các lab tiếp theo sẽ được cập nhật liên tục theo tiến độ học phần trên lớp)*.
+### Lab 2 — Mô hình ngôn ngữ N-gram, Làm mịn và Perplexity
+- **Chủ đề:** N-gram Language Models, Zero Probability, Laplace Smoothing, Perplexity và Ứng dụng.
+- **Nội dung chính:**
+  - Tự triển khai mô hình N-gram (Unigram, Bigram, Trigram) từ đầu theo chuẩn OOP với class `NGramLanguageModel`.
+  - Giải quyết hiện tượng Zero-Frequency bằng **Laplace (Add-1) Smoothing** và xử lý chống Numerical Underflow bằng Log-probability.
+  - Thực nghiệm khảo sát phân phối Zipf của N-gram trên tập dữ liệu C4 (hơn 50.000 câu văn).
+  - Đánh giá định lượng mô hình qua chỉ số **Perplexity (PPL)** trên 3 tập tách biệt (Train, Validation, Test).
+  - Triển khai 2 ứng dụng thực tế: **Dự đoán từ tiếp theo (Next-Word Prediction)** và **Xếp hạng câu (Sentence Ranking)**.
+  - Phân tích lỗi và làm rõ các giới hạn cốt lõi của N-gram (ngữ cảnh ngắn, bùng nổ dữ liệu thưa, thiếu khái quát hóa ngữ nghĩa), tạo tiền đề cho Word Embeddings và Neural Language Models (RNN, Transformer).
 
 ---
 
