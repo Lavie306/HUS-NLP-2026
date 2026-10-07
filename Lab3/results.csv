@@ -1,0 +1,40 @@
+experiment,word_pair_or_analogy,window,vector_size,min_count,epochs,score,notes
+toy_cooccurrence_similarity,cat - dog,1,None,1,None,1.0000,Identical context vectors on toy corpus
+toy_cooccurrence_similarity,cat - fish,1,None,1,None,0.4082,Window 1 direct context
+toy_cooccurrence_similarity,dog - meat,1,None,1,None,0.4082,Window 1 direct context
+toy_cooccurrence_similarity,cat - dog,2,None,1,None,1.0000,Identical context vectors
+toy_cooccurrence_similarity,cat - fish,2,None,1,None,0.5774,Window 2 captures wider overlap
+toy_cooccurrence_similarity,dog - meat,2,None,1,None,0.4082,Window 2
+domain_cooccurrence_similarity,doctor - physician,1,None,1,None,0.6124,Count-based cooccurrence window 1
+domain_cooccurrence_similarity,doctor - hospital,1,None,1,None,0.8165,Direct co-occurrence with the and at
+domain_cooccurrence_similarity,car - automobile,1,None,1,None,0.8660,Both share context driver
+domain_cooccurrence_similarity,doctor - banana,1,None,1,None,0.8660,Spurious similarity due to shared stopword the
+domain_cooccurrence_similarity,doctor - physician,2,None,1,None,0.8006,Window 2 captures patient context
+domain_cooccurrence_similarity,doctor - hospital,2,None,1,None,0.6124,Window 2
+domain_cooccurrence_similarity,car - automobile,2,None,1,None,0.8006,Window 2
+domain_cooccurrence_similarity,doctor - banana,2,None,1,None,0.6667,Spurious similarity drops as window grows
+domain_cooccurrence_similarity,doctor - physician,5,None,1,None,0.8352,Window 5 captures clinical domain overlap
+domain_cooccurrence_similarity,doctor - hospital,5,None,1,None,0.8686,Strong domain co-occurrence
+domain_cooccurrence_similarity,car - automobile,5,None,1,None,0.8250,Strong vehicle domain co-occurrence
+domain_cooccurrence_similarity,doctor - banana,5,None,1,None,0.4330,Further drops with broader topical window
+word2vec_sweep,doctor - physician,2,100,1,30,-0.1315,Small corpus Word2Vec window 2
+word2vec_sweep,doctor - hospital,2,100,1,30,-0.0945,Small corpus Word2Vec window 2
+word2vec_sweep,car - automobile,2,100,1,30,0.1034,Small corpus Word2Vec window 2
+word2vec_sweep,computer - football,2,100,1,30,-0.0559,Unrelated concepts
+word2vec_sweep,computer - banana,2,100,1,30,-0.0681,Unrelated concepts
+word2vec_sweep,doctor - physician,5,100,1,30,-0.1351,Word2Vec baseline window 5
+word2vec_sweep,doctor - hospital,5,100,1,30,-0.0911,Word2Vec baseline window 5
+word2vec_sweep,car - automobile,5,100,1,30,0.0969,Word2Vec baseline window 5
+word2vec_sweep,computer - football,5,100,1,30,-0.0390,Word2Vec baseline window 5
+word2vec_sweep,computer - banana,5,100,1,30,-0.0450,Word2Vec baseline window 5
+word2vec_sweep,doctor - physician,10,100,1,30,-0.1325,Word2Vec window 10
+word2vec_sweep,doctor - hospital,10,100,1,30,-0.0880,Word2Vec window 10
+word2vec_sweep,car - automobile,10,100,1,30,0.1015,Word2Vec window 10
+word2vec_sweep,computer - football,10,100,1,30,-0.0442,Word2Vec window 10
+word2vec_sweep,computer - banana,10,100,1,30,-0.0432,Word2Vec window 10
+word2vec_similarity,car - driver,5,100,1,30,0.1769,Domain relationship in vehicle context
+word2vec_similarity,king - queen,5,100,1,30,0.0525,Royal relationship in tiny corpus
+word2vec_analogy,king - man + woman,5,100,1,30,0.2177,Top candidate software (spurious due to tiny corpus data sparsity)
+semantic_search,medical treatment -> clinic doc,5,100,1,30,0.6113,Query mean vector vs document mean vector
+semantic_search,medical treatment -> computer doc,5,100,1,30,0.2786,Contains medical records and clinical data
+semantic_search,medical treatment -> doctor doc,5,100,1,30,0.1879,Contains doctor physician therapy clinical care
