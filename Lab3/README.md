@@ -13,7 +13,7 @@ Thư mục đã được hoàn thiện đầy đủ 100% theo đúng đặc tả
 ```text
 Lab3/
 ├── README.md              # Báo cáo tổng quan, hướng dẫn chạy và tường trình AI Policy
-├── calculations.md        # Lời giải tính tay chi tiết Bài 1 - 4 & bài tập Analogy
+├── Calculations.pdf        # Bản scan lời giải tính tay chi tiết Bài 1 - 4 & bài tập Analogy
 ├── prediction.md          # Dự đoán trước thực nghiệm theo Distributional Hypothesis
 ├── cooccurrence.py        # Mã nguồn cốt lõi (Vocabulary, Co-occurrence matrix, Cosine, Most-similar)
 ├── experiments.ipynb      # Notebook thực nghiệm hoàn chỉnh (Word2Vec sweep, Analogy, Semantic Search)
@@ -27,7 +27,7 @@ Lab3/
 
 ## 2. Tóm tắt các kết quả chính
 
-### A. Lý thuyết & Tính toán (`calculations.md`)
+### A. Lý thuyết & Tính toán (`Calculations.pdf`)
 - **Bài 1:** Xây dựng ma trận co-occurrence ($k=1$). Minh chứng hai từ `cat` và `dog` có vector ngữ cảnh trùng khít (`[0, 0, 1, 1, 0, 0, 0]`) do chia sẻ cùng phân bố từ ngữ cảnh (`eats`, `likes`), minh họa trực quan giả thuyết Distributional Hypothesis.
 - **Bài 2:** Hai vector $x = [1, 2, 1]$ và $y = [2, 4, 2]$ cùng phương cho $\cos(x, y) = 1.0$. Cosine similarity triệt tiêu ảnh hưởng của độ lớn/tần suất, chỉ đo hướng tương đối của ngữ cảnh.
 - **Bài 3:** $\cos(\text{doctor}, \text{physician}) \approx 0.9871$ trong khi $\cos(\text{doctor}, \text{banana}) \approx -0.1414$, phân biệt chính xác từ đồng nghĩa y tế và từ không liên quan.
