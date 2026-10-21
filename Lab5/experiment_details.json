@@ -1,0 +1,163 @@
+{
+  "dataset": {
+    "samples": 50000,
+    "classes": {
+      "positive": 25000,
+      "negative": 25000
+    },
+    "minimum_tokens": 6,
+    "median_tokens": 173.0,
+    "mean_tokens": 231.27518,
+    "maximum_tokens": 2477,
+    "quantiles": {
+      "0.5": 173.0,
+      "0.75": 280.0,
+      "0.9": 452.0,
+      "0.95": 589.0
+    },
+    "duplicate_documents": 418,
+    "missing_text": 0,
+    "missing_labels": 0
+  },
+  "split_sizes": {
+    "train": 5000,
+    "validation": 1000,
+    "test": 1000
+  },
+  "config": {
+    "seed": 42,
+    "epochs": 2,
+    "batch_size": 64,
+    "embedding_size": 64,
+    "hidden_size": 64,
+    "learning_rate": 0.001,
+    "primary_length": 100
+  },
+  "cell_matches_torch": true,
+  "history": {
+    "RNN": [
+      {
+        "epoch": 1,
+        "train_loss": 0.6992209780065319,
+        "validation_loss": 0.6992320381104946,
+        "validation_f1": 0.44739756367663347
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.6844936458370353,
+        "validation_loss": 0.6995135806500912,
+        "validation_f1": 0.4214123006833713
+      }
+    ],
+    "LSTM": [
+      {
+        "epoch": 1,
+        "train_loss": 0.6942556251453448,
+        "validation_loss": 0.6912184655666351,
+        "validation_f1": 0.4697986577181208
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.6834430415419084,
+        "validation_loss": 0.6868266314268112,
+        "validation_f1": 0.5072164948453608
+      }
+    ],
+    "GRU": [
+      {
+        "epoch": 1,
+        "train_loss": 0.696442186832428,
+        "validation_loss": 0.6923832595348358,
+        "validation_f1": 0.49794238683127573
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.6814192178883131,
+        "validation_loss": 0.6892136819660664,
+        "validation_f1": 0.5555555555555556
+      }
+    ],
+    "GRU_50": [
+      {
+        "epoch": 1,
+        "train_loss": 0.6953355443628528,
+        "validation_loss": 0.6934265494346619,
+        "validation_f1": 0.5437616387337058
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.6826695369768746,
+        "validation_loss": 0.6936936862766743,
+        "validation_f1": 0.5616942909760589
+      }
+    ],
+    "GRU_200": [
+      {
+        "epoch": 1,
+        "train_loss": 0.6925396202485773,
+        "validation_loss": 0.6855479367077351,
+        "validation_f1": 0.5417925478348439
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.6659749225725101,
+        "validation_loss": 0.6770570762455463,
+        "validation_f1": 0.6671850699844479
+      }
+    ]
+  },
+  "probes": {
+    "application": {
+      "short": 0.48211610317230225,
+      "long": 0.4274612367153168,
+      "negation": 0.45639362931251526,
+      "contrast": 0.42008665204048157
+    },
+    "positions": {
+      "0": {
+        "Ultimately it was excellent.": 0.5047774910926819,
+        "Ultimately it was terrible.": 0.505035936832428
+      },
+      "1": {
+        "Ultimately it was excellent.": 0.5178714394569397,
+        "Ultimately it was terrible.": 0.5235931277275085
+      },
+      "2": {
+        "Ultimately it was excellent.": 0.5133099555969238,
+        "Ultimately it was terrible.": 0.5206906795501709
+      }
+    },
+    "order": [
+      {
+        "review": "this movie is not good",
+        "tfidf_positive_probability": 0.4768981339177489,
+        "gru_positive_probability": 0.4382697641849518
+      },
+      {
+        "review": "this movie is good not",
+        "tfidf_positive_probability": 0.4768981339177489,
+        "gru_positive_probability": 0.4468614459037781
+      },
+      {
+        "review": "the film is not bad",
+        "tfidf_positive_probability": 0.028381375801096176,
+        "gru_positive_probability": 0.4926282465457916
+      },
+      {
+        "review": "the film is bad not",
+        "tfidf_positive_probability": 0.028381375801096176,
+        "gru_positive_probability": 0.4822458028793335
+      }
+    ]
+  },
+  "confusion_matrix": [
+    [
+      252,
+      248
+    ],
+    [
+      179,
+      321
+    ]
+  ]
+}

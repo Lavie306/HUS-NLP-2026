@@ -1,6 +1,7 @@
 # Natural Language Processing & Applications (NLP 2026)
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C?logo=pytorch&logoColor=white)
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange?logo=jupyter&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikit-learn&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Active%20Coursework-success)
@@ -8,73 +9,152 @@
 
 ---
 
-## Overview
-This repository contains coursework, lab assignments, and experimental code for the **Natural Language Processing & Applications** course (Semester I - 2026) at **VNU University of Science (VNU-HUS)**.
+## Tổng quan khóa học (Overview)
 
-The repository is organized progressively by lab topics and experimental modules throughout the course, transitioning from fundamental lexical representations to advanced deep learning architectures for NLP.
+Kho lưu trữ này chứa toàn bộ mã nguồn, tài liệu thực hành, bài tập tính toán và báo cáo phân tích thực nghiệm của học phần **Xử lý ngôn ngữ tự nhiên và ứng dụng** (*Natural Language Processing & Applications* — Học kỳ I, Năm học 2026) tại **Trường Đại học Khoa học Tự nhiên — ĐHQGHN (VNU-HUS)**.
+
+- **Giảng viên / TA:** Phạm Ngọc Hải  
+- **Sinh viên thực hiện:** Nguyễn Trọng Thành  
+
+Chương trình học được thiết kế theo lộ trình tiến hóa tự nhiên của ngành NLP: từ các biểu diễn từ vựng rời rạc/thưa cổ điển (Sparse Representations: Bag-of-Words, TF-IDF, N-gram) đến các biểu diễn phân bố dày (Dense Embeddings: Word2Vec), bài toán phân loại văn bản tĩnh (Text Classification), và chuyển dịch sang mô hình hóa chuỗi tuần tự theo thời gian (Sequential Modeling: RNN, LSTM, GRU), tạo tiền đề trực tiếp mở đường sang cơ chế Chú ý (**Attention Mechanism — LAB 06**) và kiến trúc **Transformer (LAB 07)**.
 
 ---
 
-## Cấu trúc dự án
+## Cấu trúc tổng thể của kho lưu trữ (Repository Structure)
 
 ```text
 NLP/
 ├── README.MD                   # Tài liệu tổng quan toàn bộ kho lưu trữ
-├── requirements.txt            # Danh sách các thư viện phụ thuộc của dự án
+├── requirements.txt            # Danh sách thư viện phụ thuộc của dự án
+├── .gitignore                  # Cấu hình bỏ qua file tạm, cache và dữ liệu lớn
+│
 ├── Lab1/                       # Lab 01: From Text Processing to Search
-│   ├── W1.pdf                  # Đề bài và hướng dẫn thực hành Lab 1
+│   ├── W1.pdf                  # Đề bài và đặc tả thực hành Lab 1
 │   ├── c4-train...-30K.json    # Tập ngữ liệu 30.000 documents trích từ C4
-│   ├── implementation.py       # Triển khai thuật toán cốt lõi TF-IDF & Unit Tests (Phần 8)
-│   ├── experiments.ipynb       # Notebook thực nghiệm phân tích Sparse Matrix (Phần 7, 9-13)
-│   ├── Calculations.pdf        # Lời giải chi tiết các bài toán tính tay (Part B)
-│   ├── Prediction.pdf          # Dự đoán giả thuyết trước khi chạy thực nghiệm (Part C)
-│   ├── results.csv             # Kết quả đo lường và đánh giá retrieval (Part H)
-│   └── Reflection.pdf          # Báo cáo phản tư, phân tích lỗi & định hướng (Part 16)
-└── Lab2/                       # Lab 02: Language Models (N-gram, Smoothing & Perplexity)
-    ├── W2.pdf                  # Đề bài và hướng dẫn thực hành Lab 2
-    ├── README.md               # Hướng dẫn chi tiết riêng cho Lab 2
-    ├── calculations.pdf         # Tính toán xác suất bằng tay (Unigram, Bigram, PPL, Laplace)
-    ├── prediction.pdf           # 5 dự đoán trước thực nghiệm (Prediction 1-5)
-    ├── ngram_lm.py             # Cốt lõi: NGramLanguageModel, MLE, Laplace, Log-prob
-    ├── experiments.ipynb       # Thực nghiệm C4: Thống kê Zipf, Perplexity, Next-Word, Ranking
-    ├── results.csv             # Bảng tổng hợp Perplexity trên Train, Validation, Test
-    ├── error_analysis.pdf       # Phân tích 2 ca dự đoán đúng & 2 ca dự đoán sai
-    └── reflection.pdf           # Báo cáo tổng kết 7 câu hỏi kết nối sang Neural LM
+│   ├── implementation.py       # Thuật toán cốt lõi: Vocabulary, TF, IDF, TF-IDF, Cosine
+│   ├── experiments.ipynb       # Thực nghiệm phân tích ma trận thưa trên 30K văn bản
+│   ├── Calculations.pdf        # Lời giải chi tiết bài toán tính tay
+│   ├── Prediction.pdf          # Dự đoán giả thuyết trước khi chạy thực nghiệm
+│   ├── results.csv             # Kết quả đánh giá retrieval (Precision@5, Recall@5, MRR)
+│   └── Reflection.pdf          # Báo cáo phản tư, phân tích Vocabulary Mismatch Problem
+│
+├── Lab2/                       # Lab 02: Language Models (N-gram, Smoothing & Perplexity)
+│   ├── W2.pdf                  # Đề bài và đặc tả thực hành Lab 2
+│   ├── README.md               # Báo cáo chi tiết riêng cho Lab 2
+│   ├── calculations.pdf        # Tính toán xác suất (Unigram, Bigram, PPL, Laplace)
+│   ├── prediction.pdf          # 5 dự đoán trước thực nghiệm
+│   ├── ngram_lm.py             # Cốt lõi: NGramLanguageModel, MLE, Laplace, Log-prob
+│   ├── experiments.ipynb       # Thực nghiệm C4: Thống kê Zipf, PPL, Next-Word, Ranking
+│   ├── results.csv             # Bảng tổng hợp Perplexity trên Train, Validation, Test
+│   ├── error_analysis.pdf      # Phân tích các ca dự đoán đúng & sai
+│   └── reflection.pdf          # Báo cáo phản ánh học tập và giới hạn của N-gram
+│
+├── Lab3/                       # Lab 03: Word Representations and Dense Embeddings
+│   ├── W3.pdf                  # Đề bài và đặc tả thực hành Lab 3
+│   ├── README.md               # Báo cáo chi tiết riêng cho Lab 3
+│   ├── Calculations.pdf        # Lời giải tính tay Co-occurrence matrix, Cosine, Analogy
+│   ├── prediction.md           # Dự đoán thực nghiệm theo Distributional Hypothesis
+│   ├── cooccurrence.py         # Triển khai Co-occurrence matrix, Cosine Similarity
+│   ├── experiments.ipynb       # Thực nghiệm Word2Vec hyperparameter sweep & Semantic Search
+│   ├── word_embedding.ipynb    # Phân tích chuyển dịch từ Sparse sang Dense Embeddings
+│   ├── results.csv             # Bảng tổng hợp số liệu đo đạc thực nghiệm
+│   ├── error_analysis.md       # Phân tích ca đúng/sai kèm corpus evidence
+│   └── reflection.md           # So sánh 4 dạng biểu diễn và phân tích hiện tượng đa nghĩa
+│
+├── Lab4/                       # Lab 04: Text Classification & Sentiment Analysis
+│   ├── W4.pdf                  # Đề bài và đặc tả thực hành Lab 4
+│   ├── README.md               # Báo cáo chi tiết riêng cho Lab 4
+│   ├── calculations.md         # Tính toán Sigmoid, Decision Threshold, Precision, Recall, F1
+│   ├── prediction.md           # Dự đoán trước thực nghiệm phân loại cảm xúc
+│   ├── preprocessing.py        # Pipeline chuẩn bị dữ liệu IMDb, chống Data Leakage
+│   ├── classification.ipynb    # Thực nghiệm phân loại: TF-IDF vs Avg Word2Vec + LR/SVM
+│   ├── results.csv             # Kết quả định lượng các mô hình phân loại
+│   ├── class_distribution.png  # Biểu đồ phân bố lớp cân bằng của IMDb
+│   ├── confusion_matrix.png    # Ma trận nhầm lẫn của mô hình baseline
+│   ├── correct_examples.csv    # Tập mẫu các đánh giá dự đoán đúng
+│   ├── error_analysis.md       # Phân tích chuyên sâu các ca phân loại sai
+│   └── reflection.md           # Nhận xét trade-off biểu diễn tĩnh và hiện tượng mất thứ tự từ
+│
+└── Lab5/                       # Lab 05: Sequence Models: RNN, LSTM and GRU
+    ├── W5.pdf                  # Đề bài và đặc tả thực hành Lab 5
+    ├── README.md               # Báo cáo tổng quan, rubric checklist và hướng dẫn kiểm tra 3 phút
+    ├── calculations.md         # Tính toán từng bước Forward RNN, Information Flow, LSTM Gates
+    ├── prediction.md           # 5 dự đoán độc lập trước khi huấn luyện (Mục 10)
+    ├── rnn_cell.py             # Cài đặt SimpleRNNCell từ đầu, đối chiếu PyTorch nn.RNNCell
+    ├── run_experiments.py      # Pipeline thực nghiệm hoàn chỉnh, tự động và tái lập
+    ├── sequence_classification.ipynb # Notebook thực nghiệm lưu sẵn output 8/8 code cells
+    ├── results.csv             # Bảng kết quả định lượng Baseline vs RNN vs LSTM vs GRU
+    ├── experiment_details.json # Metadata thống kê 50k IMDb, learning history, probes
+    ├── learning_curves.png     # Biểu đồ đường cong học tập Train/Val Loss qua các epoch
+    ├── confusion_matrix.png    # Ma trận nhầm lẫn của mô hình GRU trên held-out test set
+    ├── sequence_lengths.png    # Histogram phân bố độ dài 50.000 bài đánh giá IMDb
+    ├── length_tradeoff.png     # Biểu đồ đánh đổi giữa độ dài chuỗi, F1 và thời gian huấn luyện
+    ├── error_analysis.md       # Phân tích lỗi (negation, contrast, truncation, ambiguity)
+    ├── reflection.md           # Báo cáo phản ánh chuyên sâu và mạch nối sang Attention
+    ├── requirements.txt        # Danh sách thư viện cần thiết cho Lab 5
+    └── gru_model.pt            # Trọng số mô hình GRU tốt nhất phục vụ suy luận trực tiếp
 ```
 
 ---
 
-## Nội dung các lab
+## Tóm tắt nội dung các bài thực hành
 
-### Lab 1 — Tách từ và biểu diễn văn bản bằng vector thưa
-- **Chủ đề:** Text Processing, Sparse Vector Representations, TF-IDF và Document Search.
+### Lab 1 — Tách từ và biểu diễn văn bản bằng vector thưa (Sparse Representations)
+- **Chủ đề:** Text Processing, Sparse Vector Representations, TF-IDF và Document Search Engine.
 - **Nội dung chính:**
-  - Thực hiện tokenization, normalization, loại bỏ stopwords và tiền xử lý đầu vào.
-  - Tự cài đặt từ đầu (from scratch) các thành phần cốt lõi: Vocabulary Builder, Count Vector, Term Frequency (TF), Inverse Document Frequency (IDF), TF-IDF, và Cosine Similarity.
-  - Thí nghiệm khảo sát trên kho ngữ liệu thực tế gồm **30.000 văn bản tiếng Anh** từ tập dữ liệu C4.
-  - Xây dựng Document Search Engine, đánh giá Precision@5, Recall@5, MRR và phân tích hiện tượng **Vocabulary Mismatch Problem**.
+  - Thực hiện chuẩn hóa văn bản, tokenization, loại bỏ stopwords.
+  - Tự cài đặt từ đầu (*from scratch*) các giải thuật cốt lõi: `Vocabulary Builder`, `Count Vector`, `Term Frequency (TF)`, `Inverse Document Frequency (IDF)`, `TF-IDF`, và `Cosine Similarity`.
+  - Khảo sát thực nghiệm trên kho ngữ liệu 30.000 văn bản tiếng Anh trích từ tập C4.
+  - Xây dựng Document Search Engine, đánh giá các chỉ số `Precision@5`, `Recall@5`, `MRR` và phân tích hiện tượng **Vocabulary Mismatch Problem**.
 
-### Lab 2 — Mô hình ngôn ngữ N-gram, Làm mịn và Perplexity
-- **Chủ đề:** N-gram Language Models, Zero Probability, Laplace Smoothing, Perplexity và Ứng dụng.
+### Lab 2 — Mô hình ngôn ngữ N-gram, Làm mịn và Perplexity (Language Modeling)
+- **Chủ đề:** N-gram Language Models, Zero-Frequency Problem, Laplace Smoothing, Perplexity.
 - **Nội dung chính:**
-  - Tự triển khai mô hình N-gram (Unigram, Bigram, Trigram) từ đầu theo chuẩn OOP với class `NGramLanguageModel`.
-  - Giải quyết hiện tượng Zero-Frequency bằng **Laplace (Add-1) Smoothing** và xử lý chống Numerical Underflow bằng Log-probability.
-  - Thực nghiệm khảo sát phân phối Zipf của N-gram trên tập dữ liệu C4 (hơn 50.000 câu văn).
-  - Đánh giá định lượng mô hình qua chỉ số **Perplexity (PPL)** trên 3 tập tách biệt (Train, Validation, Test).
+  - Triển khai mô hình Unigram, Bigram, Trigram theo thiết kế hướng đối tượng OOP (`NGramLanguageModel`).
+  - Giải quyết bài toán xác suất bằng không với kỹ thuật **Laplace (Add-1) Smoothing** và xử lý chống tràn số dưới (*numerical underflow*) bằng thang Log-probability.
+  - Khảo sát quy luật Zipf trên 50.000 câu văn bản C4.
+  - Đánh giá định lượng mô hình ngôn ngữ thông qua chỉ số **Perplexity (PPL)** trên 3 tập dữ liệu độc lập (Train, Validation, Test).
   - Triển khai 2 ứng dụng thực tế: **Dự đoán từ tiếp theo (Next-Word Prediction)** và **Xếp hạng câu (Sentence Ranking)**.
-  - Phân tích lỗi và làm rõ các giới hạn cốt lõi của N-gram (ngữ cảnh ngắn, bùng nổ dữ liệu thưa, thiếu khái quát hóa ngữ nghĩa), tạo tiền đề cho Word Embeddings và Neural Language Models (RNN, Transformer).
+
+### Lab 3 — Biểu diễn từ và Không gian vector dày (Dense Word Embeddings)
+- **Chủ đề:** Distributional Hypothesis, Co-occurrence Matrix, Word2Vec (Skip-gram / CBOW), GloVe, Vector Arithmetic.
+- **Nội dung chính:**
+  - Hiện thực hóa giả thuyết phân bố (*Distributional Hypothesis*): *"You shall know a word by the company it keeps"*.
+  - Tự xây dựng ma trận đồng xuất hiện ngữ cảnh (Co-occurrence Matrix) với sliding window $k=1$.
+  - Huấn luyện mô hình **Word2Vec** qua thư viện Gensim với sweep siêu tham số: Context Window $\in \{2, 5, 10\}$ và Vector Dimension $\in \{50, 100, 300\}$.
+  - Khảo sát các phép toán vector ngữ nghĩa (Word Analogy: $\vec{v}_{\text{king}} - \vec{v}_{\text{man}} + \vec{v}_{\text{woman}} \approx \vec{v}_{\text{queen}}$).
+  - Xây dựng hệ thống tìm kiếm ngữ nghĩa (**Semantic Search**) vượt qua giới hạn so khớp từ khóa chính xác.
+
+### Lab 4 — Phân loại văn bản và Cảm xúc (Text Classification & Sentiment Analysis)
+- **Chủ đề:** Sentiment Classification, IMDb Movie Reviews, Representation Comparison, Data Leakage Prevention.
+- **Nội dung chính:**
+  - Xây dựng pipeline phân loại cảm xúc nhị phân trên bộ dữ liệu 50.000 bài đánh giá phim IMDb.
+  - Tuân thủ nguyên tắc chống rò rỉ dữ liệu (*Split-before-fit*): chỉ trích xuất từ vựng và IDF trên tập Train, sau đó mới transform Validation và Test.
+  - So sánh đối đầu giữa biểu diễn thưa (TF-IDF Unigram, Bigram) và biểu diễn dày (Average Word2Vec) khi kết hợp với Logistic Regression và Linear SVM.
+  - Phân tích hiện tượng **mất thứ tự từ** của Average Word2Vec: `"not good"` và `"good not"` bị tính gộp như nhau do tính giao hoán của phép cộng vector.
+
+### Lab 5 — Mô hình chuỗi tuần tự: RNN, LSTM và GRU (Sequential Modeling)
+- **Chủ đề:** Sequence Classification, Recurrent Computation, Vanishing Gradient, Gated Architectures, Length Trade-offs.
+- **Nội dung chính:**
+  - Tự cài đặt **`SimpleRNNCell`** từ đầu ($h_t = \tanh(W_{xh}x_t + W_{hh}h_{t-1} + b_h)$) và đối chiếu trùng khớp tuyệt đối với `torch.nn.RNNCell`.
+  - Khảo sát toàn diện 50.000 bài đánh giá IMDb, phân tích phân bố độ dài lệch phải và vẽ biểu đồ histogram.
+  - So sánh công bằng 3 kiến trúc mạng nơ-ron hồi quy: **RNN, LSTM, GRU** (cùng embedding 64, hidden 64, Adam lr=0.001, 2 epochs) với Baseline TF-IDF + Logistic Regression.
+  - Khảo sát sự đánh đổi tính toán (*Length Trade-off*): tăng `max_length` từ 50 lên 200 giúp F1 tăng từ 0.56 lên 0.65 nhưng thời gian huấn luyện tăng gấp 15 lần.
+  - Đo lường định tính bằng các probe: Order Sensitivity Probe (chứng minh GRU nhạy cảm với thứ tự từ hơn Bag-of-Words), Application Probe, Long-Range Position Probe.
+  - Phân tích nguyên nhân lỗi (cắt cụt truncation, từ phủ định negation, cấu trúc tương phản contrast).
+  - Làm rõ nút thắt cổ chai của mạng hồi quy (nén chuỗi dài vào 1 vector ẩn và tính toán tuần tự không thể song song hóa), tạo tiền đề chuyển dịch sang **Attention (LAB 06)** và **Transformer (LAB 07)**.
 
 ---
 
-## Các bước triển khai
+## Hướng dẫn cài đặt và Chạy thực nghiệm (Quickstart)
 
-### 1. Khởi tạo môi trường ảo (Khuyến nghị)
-Sử dụng `venv` hoặc `conda` để tạo môi trường Python độc lập:
+### 1. Khởi tạo môi trường ảo
+Khuyến nghị sử dụng Python 3.9 trở lên (đặc biệt Python 3.10 hoặc 3.11):
 ```bash
-# Tạo môi trường ảo với Python 3.9+
+# Tạo môi trường ảo
 python -m venv venv
 
-# Kích hoạt môi trường trên Windows (PowerShell):
+# Kích hoạt trên Windows PowerShell:
 .\venv\Scripts\Activate.ps1
 
 # Hoặc kích hoạt trên Linux/macOS:
@@ -82,31 +162,62 @@ source venv/bin/activate
 ```
 
 ### 2. Cài đặt các thư viện phụ thuộc
-Cài đặt toàn bộ các gói thư viện cần thiết từ file `requirements.txt`:
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Thực thi và kiểm tra mã nguồn Lab 1
+### 3. Thực thi nhanh từng bài thực hành
 
-- **Chạy kiểm thử tự động thuật toán cốt lõi (Phần 8):**
-  ```bash
-  cd Lab1
-  python implementation.py
-  ```
-  *Kết quả kỳ vọng:* Tất cả 6 hàm tính toán (`build_vocabulary`, `compute_counts`, `compute_tf`, `compute_idf`, `compute_tfidf`, `cosine_similarity`) đều vượt qua kiểm thử với sai số $< 10^{-9}$.
+#### Chạy Lab 1:
+```bash
+cd Lab1
+python implementation.py
+jupyter notebook experiments.ipynb
+```
 
-- **Mở và chạy Notebook thực nghiệm trên 30K documents (Phần 7):**
-  Khởi động Jupyter Notebook / JupyterLab hoặc mở trực tiếp trong VS Code:
-  ```bash
-  jupyter notebook experiments.ipynb
-  ```
-  Các cell trong notebook sẽ nạp tập C4, tính toán ma trận thưa, đo độ thưa và trực quan hóa top từ vựng.
+#### Chạy Lab 2:
+```bash
+cd Lab2
+python ngram_lm.py
+jupyter notebook experiments.ipynb
+```
+
+#### Chạy Lab 3:
+```bash
+cd Lab3
+python cooccurrence.py
+jupyter notebook experiments.ipynb
+```
+
+#### Chạy Lab 4:
+```bash
+cd Lab4
+python preprocessing.py
+jupyter notebook classification.ipynb
+```
+
+#### Chạy Lab 5:
+```bash
+cd Lab5
+# 1. Kiểm tra SimpleRNNCell tự code với PyTorch:
+python rnn_cell.py
+
+# 2. Chạy toàn bộ pipeline huấn luyện, đánh giá và xuất kết quả:
+python run_experiments.py
+
+# 3. Mở Jupyter Notebook xem trực quan hóa kết quả đã nạp sẵn:
+jupyter notebook sequence_classification.ipynb
+```
 
 ---
 
 ## Công nghệ & Thư viện sử dụng
-- **Ngôn ngữ lập trình:** Python 3.9+
-- **Khoa học dữ liệu & Tính toán số học:** NumPy, SciPy, Pandas
-- **Học máy & NLP cổ điển:** scikit-learn, NLTK
-- **Môi trường thực nghiệm & Trực quan:** Jupyter Notebook, Matplotlib
+- **Ngôn ngữ lập trình:** Python 3.9+ / 3.10 / 3.11
+- **Deep Learning Framework:** PyTorch 2.0+ (Torch, Torch.nn, PackedSequence)
+- **Học máy & NLP cổ điển:** scikit-learn, Gensim (Word2Vec), NLTK
+- **Tính toán khoa học & Xử lý dữ liệu:** NumPy, SciPy, Pandas
+- **Trực quan hóa:** Matplotlib, Seaborn
+- **Môi trường thực nghiệm:** Jupyter Notebook, IPython
+
+---
+*Kho lưu trữ được cập nhật và kiểm thử tự động, tuân thủ các chuẩn mực khoa học và chính sách học thuật của Trường Đại học Khoa học Tự nhiên — ĐHQGHN.*
