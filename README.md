@@ -75,24 +75,43 @@ NLP/
 │   ├── error_analysis.md       # Phân tích chuyên sâu các ca phân loại sai
 │   └── reflection.md           # Nhận xét trade-off biểu diễn tĩnh và hiện tượng mất thứ tự từ
 │
-└── Lab5/                       # Lab 05: Sequence Models: RNN, LSTM and GRU
-    ├── W5.pdf                  # Đề bài và đặc tả thực hành Lab 5
-    ├── README.md               # Báo cáo tổng quan, rubric checklist và hướng dẫn kiểm tra 3 phút
-    ├── calculations.md         # Tính toán từng bước Forward RNN, Information Flow, LSTM Gates
-    ├── prediction.md           # 5 dự đoán độc lập trước khi huấn luyện (Mục 10)
-    ├── rnn_cell.py             # Cài đặt SimpleRNNCell từ đầu, đối chiếu PyTorch nn.RNNCell
-    ├── run_experiments.py      # Pipeline thực nghiệm hoàn chỉnh, tự động và tái lập
-    ├── sequence_classification.ipynb # Notebook thực nghiệm lưu sẵn output 8/8 code cells
-    ├── results.csv             # Bảng kết quả định lượng Baseline vs RNN vs LSTM vs GRU
-    ├── experiment_details.json # Metadata thống kê 50k IMDb, learning history, probes
-    ├── learning_curves.png     # Biểu đồ đường cong học tập Train/Val Loss qua các epoch
-    ├── confusion_matrix.png    # Ma trận nhầm lẫn của mô hình GRU trên held-out test set
-    ├── sequence_lengths.png    # Histogram phân bố độ dài 50.000 bài đánh giá IMDb
-    ├── length_tradeoff.png     # Biểu đồ đánh đổi giữa độ dài chuỗi, F1 và thời gian huấn luyện
-    ├── error_analysis.md       # Phân tích lỗi (negation, contrast, truncation, ambiguity)
-    ├── reflection.md           # Báo cáo phản ánh chuyên sâu và mạch nối sang Attention
-    ├── requirements.txt        # Danh sách thư viện cần thiết cho Lab 5
-    └── gru_model.pt            # Trọng số mô hình GRU tốt nhất phục vụ suy luận trực tiếp
+├── Lab5/                       # Lab 05: Sequence Models: RNN, LSTM and GRU
+│   ├── W5.pdf                  # Đề bài và đặc tả thực hành Lab 5
+│   ├── README.md               # Báo cáo tổng quan, rubric checklist và hướng dẫn kiểm tra 3 phút
+│   ├── calculations.md         # Tính toán từng bước Forward RNN, Information Flow, LSTM Gates
+│   ├── prediction.md           # 5 dự đoán độc lập trước khi huấn luyện (Mục 10)
+│   ├── rnn_cell.py             # Cài đặt SimpleRNNCell từ đầu, đối chiếu PyTorch nn.RNNCell
+│   ├── run_experiments.py      # Pipeline thực nghiệm hoàn chỉnh, tự động và tái lập
+│   ├── sequence_classification.ipynb # Notebook thực nghiệm lưu sẵn output 8/8 code cells
+│   ├── results.csv             # Bảng kết quả định lượng Baseline vs RNN vs LSTM vs GRU
+│   ├── experiment_details.json # Metadata thống kê 50k IMDb, learning history, probes
+│   ├── learning_curves.png     # Biểu đồ đường cong học tập Train/Val Loss qua các epoch
+│   ├── confusion_matrix.png    # Ma trận nhầm lẫn của mô hình GRU trên held-out test set
+│   ├── sequence_lengths.png    # Histogram phân bố độ dài 50.000 bài đánh giá IMDb
+│   ├── length_tradeoff.png     # Biểu đồ đánh đổi giữa độ dài chuỗi, F1 và thời gian huấn luyện
+│   ├── error_analysis.md       # Phân tích lỗi (negation, contrast, truncation, ambiguity)
+│   ├── reflection.md           # Báo cáo phản ánh chuyên sâu và mạch nối sang Attention
+│   ├── requirements.txt        # Danh sách thư viện cần thiết cho Lab 5
+│   └── gru_model.pt            # Trọng số mô hình GRU tốt nhất phục vụ suy luận trực tiếp
+│
+└── Lab6/                       # Lab 06: Attention Mechanism: From Recurrent State to Context-Aware
+    ├── W6.pdf                  # Đề bài và đặc tả thực hành Lab 6
+    ├── README.md               # Báo cáo tổng quan, rubric checklist và hướng dẫn chạy
+    ├── calculations.md         # Lời giải tính tay: Scores, Softmax, Context, Scaling, Temperature
+    ├── prediction.md           # 5 dự đoán trước thực nghiệm kèm lý giải và đối chiếu thực nghiệm
+    ├── attention_numpy.py      # Cài đặt Attention từ đầu bằng NumPy (stable softmax, scaled attn)
+    ├── self_attention.ipynb    # Notebook thực nghiệm hoàn chỉnh lưu sẵn output tất cả cells
+    ├── results.csv             # Bảng kết quả định lượng so sánh LSTM (Lab 05) vs Self-Attention (Lab 06)
+    ├── attention_model.pt      # Trọng số mô hình PyTorch đã huấn luyện
+    ├── experiment_details.json # Metadata chi tiết về kết quả thí nghiệm và lịch sử loss
+    ├── attention_heatmap.png   # Trực quan hóa ma trận Attention (Heatmap) câu ví dụ 'cat'
+    ├── confusion_matrix.png    # Ma trận nhầm lẫn của mô hình Self-Attention trên tập test IMDb
+    ├── query_attention.png     # Biểu đồ phân phối attention theo Query (Sentiment vs Topic)
+    ├── temperature_experiment.png # Biểu đồ khảo sát phân phối và entropy theo nhiệt độ T
+    ├── sequence_length_cost.png# Biểu đồ phân tích chi phí tính toán bậc hai O(T^2)
+    ├── error_analysis.md       # Phân tích lỗi (3 mẫu đúng, 3 mẫu sai trên tập test IMDb)
+    ├── reflection.md           # Báo cáo phản ánh chuyên sâu và cầu nối sang Transformer (Lab 07)
+    └── requirements.txt        # Danh sách thư viện cần thiết cho Lab 6
 ```
 
 ---
@@ -143,6 +162,18 @@ NLP/
   - Đo lường định tính bằng các probe: Order Sensitivity Probe (chứng minh GRU nhạy cảm với thứ tự từ hơn Bag-of-Words), Application Probe, Long-Range Position Probe.
   - Phân tích nguyên nhân lỗi (cắt cụt truncation, từ phủ định negation, cấu trúc tương phản contrast).
   - Làm rõ nút thắt cổ chai của mạng hồi quy (nén chuỗi dài vào 1 vector ẩn và tính toán tuần tự không thể song song hóa), tạo tiền đề chuyển dịch sang **Attention (LAB 06)** và **Transformer (LAB 07)**.
+
+### Lab 6 — Cơ chế Attention: Từ Hidden State tới Biểu diễn nhạy ngữ cảnh (Attention Mechanism)
+- **Chủ đề:** Attention Mechanism, Query/Key/Value, Scaled Dot-Product, Self-Attention, Temperature, O(T^2) Complexity.
+- **Nội dung chính:**
+  - Giải quyết bài toán **Information Bottleneck** của mạng hồi quy bằng cách cho phép mô hình kết nối trực tiếp mọi cặp vị trí $(i, j)$ qua cơ chế Attention.
+  - Tự cài đặt từ đầu bằng **NumPy thuần** (`attention_numpy.py`): `stable_softmax` (trừ $\max(x)$ chống tràn số overflow), `softmax_with_temperature`, `entropy`, `scaled_dot_product_attention`, và `self_attention`.
+  - Thực hiện bài tập tính tay toàn bộ quy trình: Attention Scores, Softmax weights, Context vector, Scaling chia $\sqrt{d_k}$, và tính toán ma trận Self-Attention với `['I', 'like', 'cats']`.
+  - Khảo sát sự thay đổi phân phối Attention theo Query: Query Sentiment tập trung vào từ cảm xúc (`'good'`), Query Topic tập trung vào từ chủ đề (`'movie'`).
+  - Trực quan hóa ma trận trọng số bằng Heatmap và làm rõ luận điểm quan trọng: **Attention weights là phân phối xác suất toán học, không phải là bằng chứng suy luận ngôn ngữ (Attention is Not Explanation).**
+  - Huấn luyện bộ phân loại **Self-Attention Classifier** trên 50.000 bài đánh giá IMDb, so sánh trực tiếp với **LSTM (LAB 05)** trên cùng tập test cân bằng: Self-Attention đạt F1 **$0.6660$** (vượt trội so với LSTM $0.5406$) và tốc độ huấn luyện nhanh gấp **$8.1$ lần** ($3.42$s vs $27.93$s).
+  - Phân tích chi phí tính toán và bộ nhớ bậc hai **$O(T^2)$ ('Attention không miễn phí')**: chỉ ra nguy cơ tràn bộ nhớ khi $T \ge 10,000$ và sự mất mát thông tin thứ tự từ nếu không có Positional Encoding, mở đường trực tiếp sang kiến trúc **Transformer (LAB 07)**.
+
 
 ---
 
@@ -208,6 +239,20 @@ python run_experiments.py
 # 3. Mở Jupyter Notebook xem trực quan hóa kết quả đã nạp sẵn:
 jupyter notebook sequence_classification.ipynb
 ```
+
+#### Chạy Lab 6:
+```bash
+cd Lab6
+# 1. Kiểm tra thuật toán Attention từ đầu bằng NumPy:
+python attention_numpy.py
+
+# 2. Chạy toàn bộ pipeline huấn luyện, đánh giá và xuất kết quả:
+python run_lab6.py
+
+# 3. Mở Jupyter Notebook xem trực quan hóa kết quả đã nạp sẵn:
+jupyter notebook self_attention.ipynb
+```
+
 
 ---
 
