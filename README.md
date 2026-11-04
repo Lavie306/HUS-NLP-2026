@@ -94,7 +94,7 @@ NLP/
 │   ├── requirements.txt        # Danh sách thư viện cần thiết cho Lab 5
 │   └── gru_model.pt            # Trọng số mô hình GRU tốt nhất phục vụ suy luận trực tiếp
 │
-└── Lab6/                       # Lab 06: Attention Mechanism: From Recurrent State to Context-Aware
+├── Lab6/                       # Lab 06: Attention Mechanism: From Recurrent State to Context-Aware
     ├── W6.pdf                  # Đề bài và đặc tả thực hành Lab 6
     ├── README.md               # Báo cáo tổng quan, rubric checklist và hướng dẫn chạy
     ├── calculations.md         # Lời giải tính tay: Scores, Softmax, Context, Scaling, Temperature
@@ -112,6 +112,23 @@ NLP/
     ├── error_analysis.md       # Phân tích lỗi (3 mẫu đúng, 3 mẫu sai trên tập test IMDb)
     ├── reflection.md           # Báo cáo phản ánh chuyên sâu và cầu nối sang Transformer (Lab 07)
     └── requirements.txt        # Danh sách thư viện cần thiết cho Lab 6
+│
+└── Lab7/                       # Lab 07: Transformer Architecture: From Attention to Transformer
+    ├── W7.pdf                  # Đề bài và đặc tả thực hành Lab 7
+    ├── README.md               # Báo cáo tổng quan, rubric checklist và phân tích toàn diện
+    ├── calculations.md         # Lời giải chi tiết bài toán tính toán và trace shape 10 bước
+    ├── prediction.md           # 6 dự đoán trước thực nghiệm và bảng đối chiếu kết quả
+    ├── positional_encoding.py  # Cài đặt Sinusoidal PE, Experiment 1 & Permutation Experiment
+    ├── transformer_block.py    # Cài đặt khối Transformer Encoder từ primitives & unit test shape
+    ├── run_all_experiments.py  # Pipeline thực nghiệm hoàn chỉnh, tự động và tái lập
+    ├── transformer_classification.ipynb # Notebook thực nghiệm lưu sẵn output tất cả cells
+    ├── results.csv             # Bảng kết quả định lượng Baseline LSTM vs Transformer Encoder
+    ├── positional_encoding.png # Biểu đồ heatmap PE và phân biệt câu hoán vị
+    ├── attention_heads.png     # Trực quan hóa sự phân hóa đa dạng giữa 4 Attention Heads
+    ├── learning_curves.png     # Biểu đồ đường cong học tập Train/Val Loss qua các epoch
+    ├── confusion_matrix.png    # Ma trận nhầm lẫn của mô hình Transformer trên tập test IMDb
+    ├── error_analysis.md       # Phân tích định tính 3 mẫu đúng, 3 mẫu sai và cảnh báo luận giải
+    └── reflection.md           # Chiêm nghiệm mạch tiến hóa LAB 01->07, vấn đáp & AI statement
 ```
 
 ---
@@ -173,6 +190,19 @@ NLP/
   - Trực quan hóa ma trận trọng số bằng Heatmap và làm rõ luận điểm quan trọng: **Attention weights là phân phối xác suất toán học, không phải là bằng chứng suy luận ngôn ngữ (Attention is Not Explanation).**
   - Huấn luyện bộ phân loại **Self-Attention Classifier** trên 50.000 bài đánh giá IMDb, so sánh trực tiếp với **LSTM (LAB 05)** trên cùng tập test cân bằng: Self-Attention đạt F1 **$0.6660$** (vượt trội so với LSTM $0.5406$) và tốc độ huấn luyện nhanh gấp **$8.1$ lần** ($3.42$s vs $27.93$s).
   - Phân tích chi phí tính toán và bộ nhớ bậc hai **$O(T^2)$ ('Attention không miễn phí')**: chỉ ra nguy cơ tràn bộ nhớ khi $T \ge 10,000$ và sự mất mát thông tin thứ tự từ nếu không có Positional Encoding, mở đường trực tiếp sang kiến trúc **Transformer (LAB 07)**.
+
+### Lab 7 — Kiến trúc Transformer: Từ Chú ý đến Khối Transformer Hoàn chỉnh (Transformer Architecture)
+- **Chủ đề:** Transformer Encoder Block, Multi-Head Attention, Sinusoidal Positional Encoding, Position-wise FFN, Residual Connections, Layer Normalization, Shape Tracing, Sequence Length Scaling $O(T^2)$.
+- **Nội dung chính:**
+  - Trả lời câu hỏi trọng tâm: *Làm thế nào để ghép Self-Attention thành một kiến trúc mạng nơ-ron sâu hoàn chỉnh để xử lý văn bản một cách ổn định và hiệu quả?*
+  - Cài đặt và kiểm chứng thực nghiệm vai trò thiết yếu của **Sinusoidal Positional Encoding**: giải quyết tính bất biến hoán vị của Self-Attention; chứng minh thực nghiệm cặp câu hoán vị *"dog bites man"* vs *"man bites dog"* có khoảng cách Euclid bằng $0.0000$ (Cosine Similarity = $1.0000$) khi thiếu PE, và tách biệt rõ rệt ($d = 0.2216$) khi có PE.
+  - Tự tay triển khai khối **`TransformerBlock` từ các tầng nguyên thủy** (`nn.Linear`, `nn.LayerNorm`, `nn.Dropout`, `F.softmax`) mà không dùng sẵn `nn.TransformerEncoderLayer`, vượt qua unit test kiểm tra shape 10 bước trung gian theo Mục 18 ($B=8, T=100, d_{model}=128, n_{heads}=4 \implies d_k=32$).
+  - Khảo sát sự phân hóa chức năng của **Multi-Head Attention** ($n_{heads} \in \{1, 2, 4, 8\}$): tìm ra cấu hình tối ưu $n_{heads} = 4$ ($d_k = 32$, F1 = $0.7298$) và trực quan hóa 4 Attention Heads thể hiện các vai trò đa dạng (cục bộ lân cận, cảm xúc tích cực, liên từ tương phản, phân tán toàn cục).
+  - Huấn luyện và so sánh mô hình **Transformer Encoder vs Baseline LSTM** trên tập dữ liệu chuẩn IMDb: Transformer đạt Accuracy **$70.88\%$**, F1 **$0.6527$** (vượt trội so với LSTM $58.00\%$ Acc, F1 $0.4456$).
+  - Khảo sát chi phí bậc hai **$O(T^2)$** theo độ dài chuỗi ($T \in \{32, 64, 128, 256\}$): số phần tử ma trận attention tăng bùng nổ từ $1,024 	o 65,536$ ($64\times$), minh chứng nút thắt cổ chai bộ nhớ của Transformer truyền thống.
+  - So sánh chiến lược Pooling (**Masked Mean Pooling** $70.88\%$ Acc vs **First-Token CLS-style** $54.96\%$ Acc).
+  - Phân tích định tính 3 mẫu đúng, 3 mẫu sai trên 2,500 mẫu kiểm thử và làm rõ nguyên tắc phương pháp luận: **Attention weights là phân phối tương tác số học nội bộ, không đồng nhất với lời giải thích nhân quả của con người (Attention is not Explanation).**
+  - Thiết lập mạch nối chuyển giao tự nhiên sang **LAB 08: Pretrained Transformer / BERT (Pretraining $\to$ Fine-tuning)**.
 
 
 ---
@@ -251,6 +281,22 @@ python run_lab6.py
 
 # 3. Mở Jupyter Notebook xem trực quan hóa kết quả đã nạp sẵn:
 jupyter notebook self_attention.ipynb
+```
+
+#### Chạy Lab 7:
+```bash
+cd Lab7
+# 1. Kiểm tra shape và logic Transformer Block từ primitives:
+python transformer_block.py
+
+# 2. Chạy thử nghiệm Positional Encoding & Permutation Experiment:
+python positional_encoding.py
+
+# 3. Chạy toàn bộ pipeline huấn luyện, đánh giá và xuất kết quả:
+python run_all_experiments.py
+
+# 4. Mở Jupyter Notebook xem trực quan hóa kết quả đã nạp sẵn:
+jupyter notebook transformer_classification.ipynb
 ```
 
 

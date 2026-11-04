@@ -1,0 +1,4 @@
+Model,Representation,Parameters,Training time (s),Accuracy,Precision,Recall,F1
+LSTM Baseline (LAB 05),Recurrent Hidden State,2692481,20.25,0.58,0.6604,0.3363,0.4456
+"Transformer Encoder (4 Heads, Mean)",Multi-Head Self-Attention + FFN,2692353,158.59,0.7088,0.8133,0.545,0.6527
+"Transformer Encoder (4 Heads, First-token)",Multi-Head Self-Attention + FFN (CLS),2692353,173.72,0.5496,0.7971,0.5341,0.5761
