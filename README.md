@@ -4,6 +4,7 @@
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C?logo=pytorch&logoColor=white)
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange?logo=jupyter&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikit-learn&logoColor=white)
+![Hugging Face](https://img.shields.io/badge/Hugging%20Face-Transformers-yellow?logo=huggingface&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Active%20Coursework-success)
 ![Institution](https://img.shields.io/badge/Institution-VNU--HUS-informational)
 
@@ -16,7 +17,7 @@ Kho lưu trữ này chứa toàn bộ mã nguồn, tài liệu thực hành, bà
 - **Giảng viên / TA:** Phạm Ngọc Hải  
 - **Sinh viên thực hiện:** Nguyễn Trọng Thành  
 
-Chương trình học được thiết kế theo lộ trình tiến hóa tự nhiên của ngành NLP: từ các biểu diễn từ vựng rời rạc/thưa cổ điển (Sparse Representations: Bag-of-Words, TF-IDF, N-gram) đến các biểu diễn phân bố dày (Dense Embeddings: Word2Vec), bài toán phân loại văn bản tĩnh (Text Classification), và chuyển dịch sang mô hình hóa chuỗi tuần tự theo thời gian (Sequential Modeling: RNN, LSTM, GRU), tạo tiền đề trực tiếp mở đường sang cơ chế Chú ý (**Attention Mechanism — LAB 06**) và kiến trúc **Transformer (LAB 07)**.
+Chương trình học được thiết kế theo lộ trình tiến hóa tự nhiên của ngành NLP: từ các biểu diễn từ vựng rời rạc/thưa cổ điển (Sparse Representations: Bag-of-Words, TF-IDF, N-gram) đến các biểu diễn phân bố dày (Dense Embeddings: Word2Vec), bài toán phân loại văn bản tĩnh (Text Classification), và chuyển dịch sang mô hình hóa chuỗi tuần tự theo thời gian (Sequential Modeling: RNN, LSTM, GRU), tạo tiền đề trực tiếp mở đường sang cơ chế Chú ý (**Attention Mechanism — LAB 06**), kiến trúc **Transformer (LAB 07)** và kỷ nguyên mô hình tiền huấn luyện (**Pretrained Transformers & BERT Fine-Tuning — LAB 08**).
 
 ---
 
@@ -113,22 +114,39 @@ NLP/
     ├── reflection.md           # Báo cáo phản ánh chuyên sâu và cầu nối sang Transformer (Lab 07)
     └── requirements.txt        # Danh sách thư viện cần thiết cho Lab 6
 │
-└── Lab7/                       # Lab 07: Transformer Architecture: From Attention to Transformer
-    ├── W7.pdf                  # Đề bài và đặc tả thực hành Lab 7
-    ├── README.md               # Báo cáo tổng quan, rubric checklist và phân tích toàn diện
-    ├── calculations.md         # Lời giải chi tiết bài toán tính toán và trace shape 10 bước
-    ├── prediction.md           # 6 dự đoán trước thực nghiệm và bảng đối chiếu kết quả
-    ├── positional_encoding.py  # Cài đặt Sinusoidal PE, Experiment 1 & Permutation Experiment
-    ├── transformer_block.py    # Cài đặt khối Transformer Encoder từ primitives & unit test shape
-    ├── run_all_experiments.py  # Pipeline thực nghiệm hoàn chỉnh, tự động và tái lập
-    ├── transformer_classification.ipynb # Notebook thực nghiệm lưu sẵn output tất cả cells
-    ├── results.csv             # Bảng kết quả định lượng Baseline LSTM vs Transformer Encoder
-    ├── positional_encoding.png # Biểu đồ heatmap PE và phân biệt câu hoán vị
-    ├── attention_heads.png     # Trực quan hóa sự phân hóa đa dạng giữa 4 Attention Heads
-    ├── learning_curves.png     # Biểu đồ đường cong học tập Train/Val Loss qua các epoch
-    ├── confusion_matrix.png    # Ma trận nhầm lẫn của mô hình Transformer trên tập test IMDb
-    ├── error_analysis.md       # Phân tích định tính 3 mẫu đúng, 3 mẫu sai và cảnh báo luận giải
-    └── reflection.md           # Chiêm nghiệm mạch tiến hóa LAB 01->07, vấn đáp & AI statement
+├── Lab7/                       # Lab 07: Transformer Architecture: From Attention to Transformer
+│   ├── W7.pdf                  # Đề bài và đặc tả thực hành Lab 7
+│   ├── README.md               # Báo cáo tổng quan, rubric checklist và phân tích toàn diện
+│   ├── calculations.md         # Lời giải chi tiết bài toán tính toán và trace shape 10 bước
+│   ├── prediction.md           # 6 dự đoán trước thực nghiệm và bảng đối chiếu kết quả
+│   ├── positional_encoding.py  # Cài đặt Sinusoidal PE, Experiment 1 & Permutation Experiment
+│   ├── transformer_block.py    # Cài đặt khối Transformer Encoder từ primitives & unit test shape
+│   ├── run_all_experiments.py  # Pipeline thực nghiệm hoàn chỉnh, tự động và tái lập
+│   ├── transformer_classification.ipynb # Notebook thực nghiệm lưu sẵn output tất cả cells
+│   ├── results.csv             # Bảng kết quả định lượng Baseline LSTM vs Transformer Encoder
+│   ├── positional_encoding.png # Biểu đồ heatmap PE và phân biệt câu hoán vị
+│   ├── attention_heads.png     # Trực quan hóa sự phân hóa đa dạng giữa 4 Attention Heads
+│   ├── learning_curves.png     # Biểu đồ đường cong học tập Train/Val Loss qua các epoch
+│   ├── confusion_matrix.png    # Ma trận nhầm lẫn của mô hình Transformer trên tập test IMDb
+│   ├── error_analysis.md       # Phân tích định tính 3 mẫu đúng, 3 mẫu sai và cảnh báo luận giải
+│   └── reflection.md           # Chiêm nghiệm mạch tiến hóa LAB 01->07, vấn đáp & AI statement
+│
+└── Lab8/                       # Lab 08: Pretrained Transformers and BERT Fine-Tuning
+    ├── W8.pdf                  # Đề bài và đặc tả thực hành Lab 8
+    ├── README.md               # Báo cáo tổng quan, số liệu thực nghiệm và vấn đáp
+    ├── calculations.md         # Lời giải chi tiết MLM Loss & Tokenization
+    ├── prediction.md           # 3 dự đoán lý thuyết trước thực nghiệm và đối chiếu
+    ├── pretrained_classification.py # Cài đặt kiến trúc PretrainedClassifier và pipeline
+    ├── tokenization.ipynb      # Notebook thực hành Tokenization, Special tokens & Attention mask
+    ├── fine_tuning.ipynb       # Notebook thực thi toàn diện 5 thí nghiệm trên GPU
+    ├── experiments.ipynb       # Notebook lưu trữ chi tiết các bước thực nghiệm Colab
+    ├── results.csv             # Bảng tổng hợp số liệu thực nghiệm chi tiết
+    ├── learning_curves.png     # Đồ thị suy giảm Loss qua các epoch
+    ├── confusion_matrix.png    # Ma trận nhầm lẫn của mô hình BERT Fine-Tuning
+    ├── data_efficiency.png     # Đồ thị hiệu quả dữ liệu Pretrained vs From-scratch
+    ├── confidence_analysis.png # Biểu đồ phân tích độ tin cậy và Confidence != Correctness
+    ├── error_analysis.md       # Phân tích định tính 8 mẫu lỗi thực tế và trả lời Q1-Q6
+    └── reflection.md           # Bài luận phản tư 300-500 từ và cầu nối sang LAB 09
 ```
 
 ---
@@ -199,11 +217,31 @@ NLP/
   - Tự tay triển khai khối **`TransformerBlock` từ các tầng nguyên thủy** (`nn.Linear`, `nn.LayerNorm`, `nn.Dropout`, `F.softmax`) mà không dùng sẵn `nn.TransformerEncoderLayer`, vượt qua unit test kiểm tra shape 10 bước trung gian theo Mục 18 ($B=8, T=100, d_{model}=128, n_{heads}=4 \implies d_k=32$).
   - Khảo sát sự phân hóa chức năng của **Multi-Head Attention** ($n_{heads} \in \{1, 2, 4, 8\}$): tìm ra cấu hình tối ưu $n_{heads} = 4$ ($d_k = 32$, F1 = $0.7298$) và trực quan hóa 4 Attention Heads thể hiện các vai trò đa dạng (cục bộ lân cận, cảm xúc tích cực, liên từ tương phản, phân tán toàn cục).
   - Huấn luyện và so sánh mô hình **Transformer Encoder vs Baseline LSTM** trên tập dữ liệu chuẩn IMDb: Transformer đạt Accuracy **$70.88\%$**, F1 **$0.6527$** (vượt trội so với LSTM $58.00\%$ Acc, F1 $0.4456$).
-  - Khảo sát chi phí bậc hai **$O(T^2)$** theo độ dài chuỗi ($T \in \{32, 64, 128, 256\}$): số phần tử ma trận attention tăng bùng nổ từ $1,024 	o 65,536$ ($64\times$), minh chứng nút thắt cổ chai bộ nhớ của Transformer truyền thống.
+  - Khảo sát chi phí bậc hai **$O(T^2)$** theo độ dài chuỗi ($T \in \{32, 64, 128, 256\}$): số phần tử ma trận attention tăng bùng nổ từ $1,024 \to 65,536$ ($64\times$), minh chứng nút thắt cổ chai bộ nhớ của Transformer truyền thống.
   - So sánh chiến lược Pooling (**Masked Mean Pooling** $70.88\%$ Acc vs **First-Token CLS-style** $54.96\%$ Acc).
   - Phân tích định tính 3 mẫu đúng, 3 mẫu sai trên 2,500 mẫu kiểm thử và làm rõ nguyên tắc phương pháp luận: **Attention weights là phân phối tương tác số học nội bộ, không đồng nhất với lời giải thích nhân quả của con người (Attention is not Explanation).**
   - Thiết lập mạch nối chuyển giao tự nhiên sang **LAB 08: Pretrained Transformer / BERT (Pretraining $\to$ Fine-tuning)**.
 
+
+---
+
+
+
+### Lab 8 — Pretrained Transformers và Tinh Chỉnh Mô Hình BERT (BERT Fine-Tuning)
+- **Chủ đề:** Pretraining, Masked Language Modeling (MLM), BERT, Subword Tokenization (WordPiece), Fine-Tuning, Sequence Classification.
+- **Nội dung chính:**
+  - Giải mã sự khác biệt căn bản giữa giai đoạn Tiền huấn luyện tự giám sát (**Pretraining**) và Tinh chỉnh chuyên biệt hóa (**Fine-tuning**).
+  - Khảo sát cơ chế giải tích hàm mất mát **Masked Language Modeling (MLM Loss)** kết hợp hàm Softmax và phân tích lý thuyết thông tin (Surprisal).
+  - Tách từ cấp độ từ con (**WordPiece Subword Tokenization**), nhận diện vai trò cấu trúc của các token đặc biệt (`[CLS]`, `[SEP]`, `[PAD]`) và cơ chế che nhiễu của **Attention Mask**.
+  - Xây dựng mô hình phân loại cảm xúc **PretrainedClassifier** hoàn chỉnh: trích xuất biểu diễn ngữ cảnh tại vị trí `[CLS]` qua 12 tầng BERT Encoder nạp vào Linear Classification Head.
+  - Thực hiện toàn diện **5 thí nghiệm có kiểm soát** trên tập dữ liệu IMDb:
+    1. *Exp 1 (Pretrained vs From Scratch):* Pretrained BERT đạt Accuracy **86.00%**, F1 **0.8649**; trong khi mô hình From Scratch chỉ đạt **49.80%** (suy biến nhãn).
+    2. *Exp 2 (Feature Extraction vs Fine-tuning):* Frozen Encoder chỉ tối ưu 1,538 tham số đạt **77.90%** (nhanh gấp 3 lần), Full Fine-tuning đạt **86.00%** (+8.10%).
+    3. *Exp 3 (Data Efficiency):* Pretrained BERT với chỉ 10% dữ liệu (400 mẫu) vẫn đạt **82.60%**, vượt trội hơn mô hình from scratch chạy trên 100% dữ liệu.
+    4. *Exp 4 (Sequence Length):* Tăng $T \in \{64, 128, 256\}$ cải thiện Accuracy từ $82.3\% \to 90.3\%$, song thời gian huấn luyện tăng gấp 4 lần và tiêu thụ RAM tăng 81% theo độ phức tạp $\mathcal{O}(T^2)$.
+    5. *Exp 5 (Domain Shift):* Đánh giá mô hình train trên IMDb khi chuyển sang Amazon Product Reviews.
+  - Phân tích định tính **8 ca lỗi thực tế** (False Positives, False Negatives, High-confidence errors) và chứng minh hiện tượng **Confidence != Correctness**.
+  - Thiết lập cầu nối chuyển tiếp sang **LAB 09: Token Classification / Named Entity Recognition (NER)**.
 
 ---
 
@@ -299,12 +337,28 @@ python run_all_experiments.py
 jupyter notebook transformer_classification.ipynb
 ```
 
+#### Chạy Lab 8:
+```bash
+cd Lab8
+# 1. Kiểm tra module phân loại và forward pass:
+python pretrained_classification.py --demo_text "This movie is absolutely remarkable!"
+
+# 2. Chạy chế độ Feature Extraction (Frozen encoder):
+python pretrained_classification.py --freeze_encoder
+
+# 3. Mở Jupyter Notebook khảo sát tokenization hoặc fine-tuning:
+jupyter notebook tokenization.ipynb
+jupyter notebook fine_tuning.ipynb
+```
+
+
 
 ---
 
 ## Công nghệ & Thư viện sử dụng
 - **Ngôn ngữ lập trình:** Python 3.9+ / 3.10 / 3.11
 - **Deep Learning Framework:** PyTorch 2.0+ (Torch, Torch.nn, PackedSequence)
+- **Transformers & Pretrained Models:** Hugging Face `transformers`, `datasets`, `evaluate`, `tokenizers`, `accelerate`
 - **Học máy & NLP cổ điển:** scikit-learn, Gensim (Word2Vec), NLTK
 - **Tính toán khoa học & Xử lý dữ liệu:** NumPy, SciPy, Pandas
 - **Trực quan hóa:** Matplotlib, Seaborn
