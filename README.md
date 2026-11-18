@@ -131,22 +131,40 @@ NLP/
 │   ├── error_analysis.md       # Phân tích định tính 3 mẫu đúng, 3 mẫu sai và cảnh báo luận giải
 │   └── reflection.md           # Chiêm nghiệm mạch tiến hóa LAB 01->07, vấn đáp & AI statement
 │
-└── Lab8/                       # Lab 08: Pretrained Transformers and BERT Fine-Tuning
-    ├── W8.pdf                  # Đề bài và đặc tả thực hành Lab 8
-    ├── README.md               # Báo cáo tổng quan, số liệu thực nghiệm và vấn đáp
-    ├── calculations.md         # Lời giải chi tiết MLM Loss & Tokenization
-    ├── prediction.md           # 3 dự đoán lý thuyết trước thực nghiệm và đối chiếu
-    ├── pretrained_classification.py # Cài đặt kiến trúc PretrainedClassifier và pipeline
-    ├── tokenization.ipynb      # Notebook thực hành Tokenization, Special tokens & Attention mask
-    ├── fine_tuning.ipynb       # Notebook thực thi toàn diện 5 thí nghiệm trên GPU
-    ├── experiments.ipynb       # Notebook lưu trữ chi tiết các bước thực nghiệm Colab
-    ├── results.csv             # Bảng tổng hợp số liệu thực nghiệm chi tiết
-    ├── learning_curves.png     # Đồ thị suy giảm Loss qua các epoch
-    ├── confusion_matrix.png    # Ma trận nhầm lẫn của mô hình BERT Fine-Tuning
-    ├── data_efficiency.png     # Đồ thị hiệu quả dữ liệu Pretrained vs From-scratch
-    ├── confidence_analysis.png # Biểu đồ phân tích độ tin cậy và Confidence != Correctness
-    ├── error_analysis.md       # Phân tích định tính 8 mẫu lỗi thực tế và trả lời Q1-Q6
-    └── reflection.md           # Bài luận phản tư 300-500 từ và cầu nối sang LAB 09
+├── Lab8/                       # Lab 08: Pretrained Transformers and BERT Fine-Tuning
+│   ├── W8.pdf                  # Đề bài và đặc tả thực hành Lab 8
+│   ├── README.md               # Báo cáo tổng quan, số liệu thực nghiệm và vấn đáp
+│   ├── calculations.md         # Lời giải chi tiết MLM Loss & Tokenization
+│   ├── prediction.md           # 3 dự đoán lý thuyết trước thực nghiệm và đối chiếu
+│   ├── pretrained_classification.py # Cài đặt kiến trúc PretrainedClassifier và pipeline
+│   ├── tokenization.ipynb      # Notebook thực hành Tokenization, Special tokens & Attention mask
+│   ├── fine_tuning.ipynb       # Notebook thực thi toàn diện 5 thí nghiệm trên GPU
+│   ├── experiments.ipynb       # Notebook lưu trữ chi tiết các bước thực nghiệm Colab
+│   ├── results.csv             # Bảng tổng hợp số liệu thực nghiệm chi tiết
+│   ├── learning_curves.png     # Đồ thị suy giảm Loss qua các epoch
+│   ├── confusion_matrix.png    # Ma trận nhầm lẫn của mô hình BERT Fine-Tuning
+│   ├── data_efficiency.png     # Đồ thị hiệu quả dữ liệu Pretrained vs From-scratch
+│   ├── confidence_analysis.png # Biểu đồ phân tích độ tin cậy và Confidence != Correctness
+│   ├── error_analysis.md       # Phân tích định tính 8 mẫu lỗi thực tế và trả lời Q1-Q6
+│   └── reflection.md           # Bài luận phản tư 300-500 từ và cầu nối sang LAB 09
+│
+└── Lab9/                       # Lab 09: Named Entity Recognition and Information Extraction
+    ├── W9.pdf                  # Đề bài và đặc tả thực hành Lab 9
+    ├── README.md               # Báo cáo tổng quan, rubric checklist và hướng dẫn chạy
+    ├── calculations.md         # Lời giải chi tiết bài tập tính toán 1, 2 và 3 (BIO, Boundary, Shape)
+    ├── prediction.md           # 3 dự đoán giả thuyết trước khi chạy thực nghiệm
+    ├── baseline_ner.py         # Mô hình Baseline (Logistic Regression + Orthographic Features)
+    ├── tokenizer_alignment.ipynb # Notebook trực quan hóa căn chỉnh nhãn subword (đã chạy)
+    ├── ner_finetuning.ipynb    # Notebook huấn luyện, đánh giá BERT và ứng dụng IE (đã chạy)
+    ├── train_ner.py            # Mã nguồn huấn luyện, phân tích lỗi và xuất metrics tự động
+    ├── results.csv             # Bảng tổng hợp so sánh Baseline vs Pretrained Transformer
+    ├── entity_metrics.csv      # Bảng chi tiết Precision, Recall, F1 theo từng loại thực thể
+    ├── entity_length_analysis.png # Đồ thị F1 score theo độ dài thực thể (1, 2, 3, 4+ tokens)
+    ├── confusion_matrix.png    # Ma trận nhầm lẫn chuẩn hóa token-level của mô hình BERT
+    ├── learning_curves.png     # Đồ thị suy giảm Loss và tăng trưởng F1 qua các epoch
+    ├── error_analysis.md       # Phân tích 15 mẫu lỗi tiêu biểu và phân tích đa nghĩa ngữ cảnh
+    ├── information_extraction.py # Pipeline trích xuất thực thể có cấu trúc từ văn bản thô
+    └── reflection.md           # Bài thu hoạch 300-500 từ và cầu nối chuyển tiếp sang LAB 10
 ```
 
 ---
@@ -242,6 +260,21 @@ NLP/
     5. *Exp 5 (Domain Shift):* Đánh giá mô hình train trên IMDb khi chuyển sang Amazon Product Reviews.
   - Phân tích định tính **8 ca lỗi thực tế** (False Positives, False Negatives, High-confidence errors) và chứng minh hiện tượng **Confidence != Correctness**.
   - Thiết lập cầu nối chuyển tiếp sang **LAB 09: Token Classification / Named Entity Recognition (NER)**.
+
+### Lab 9 — Nhận diện Thực thể Định danh và Trích xuất Thông tin (Named Entity Recognition & IE)
+- **Chủ đề:** Token Classification, BIO Tagging, Subword-to-Word Label Alignment, Ignore Index (-100), Entity-Level Metrics (Seqeval), Error Analysis, Metonymy / Polysemy, Information Extraction (IE).
+- **Nội dung chính:**
+  - Chuyển dịch tư duy từ **Sequence Classification** ($X \to y$ qua vector `[CLS]`) sang **Token Classification** ($X = (x_1, \dots, x_T) \to Y = (y_1, \dots, y_T)$ qua từng vector ẩn $\mathbf{h}_i$).
+  - Nắm vững cơ chế gán nhãn **BIO Tagging** (`B-X`, `I-X`, `O`) để biểu diễn chính xác cả loại thực thể lẫn ranh giới (boundary) thực thể.
+  - Giải quyết bài toán căn chỉnh nhãn (**Subword Label Alignment Problem**) do tokenizer tách từ thành các mảnh subword; áp dụng triệt để **Strategy A** (gán nhãn cho subword đầu tiên, các subword tiếp theo và token đặc biệt gán `-100` để `CrossEntropyLoss` tự động bỏ qua).
+  - Hoàn thành trọn vẹn 3 bài tập tính toán: Biểu diễn BIO câu Elon Musk, chứng minh sự cần thiết của nhãn `B-` đối với ranh giới *"University of California Berkeley"*, và suy luận kích thước tensor ($H \in \mathbb{R}^{8 \times 128 \times 768}$, $Z \in \mathbb{R}^{8 \times 128 \times 9}$, $Y \in \mathbb{R}^{8 \times 128}$).
+  - Huấn luyện và so sánh mô hình **Baseline (Logistic Regression + Orthographic Features)** và **Pretrained Transformer (`bert-base-cased`)** trên tập dữ liệu chuẩn CoNLL-2003:
+    - Baseline: Precision = 0.6940, Recall = 0.7408, F1 = **0.7166**.
+    - Transformer: Precision = 0.9054, Recall = 0.9196, F1 = **0.9124** (vượt trội +19.58% F1).
+  - Phân tích chi tiết theo loại thực thể (`PER` F1 0.9646, `LOC` F1 0.9290, `ORG` F1 0.8981, `MISC` F1 0.7926) và theo độ dài thực thể (thực thể 1-2 tokens đạt F1 ~0.91-0.92, thực thể 4+ tokens giảm xuống 0.8444).
+  - Phân tích định tính 15 mẫu lỗi tiêu biểu (5 False Positives, 5 False Negatives, 5 Boundary & Type Errors) và 3 ví dụ đa nghĩa ngữ cảnh (*Barcelona*, *Leicester*, *Tasmania*) minh chứng lợi thế vượt trội của Contextual Representation so với Static Embedding.
+  - Xây dựng pipeline **Information Extraction** chuyển đổi văn bản thô thành dữ liệu có cấu trúc JSON và đánh giá định lượng trên 30 câu benchmark đạt F1 > 0.90.
+  - Thiết lập cầu nối chuyển giao tự nhiên sang **LAB 10: Question Answering (Span Prediction: $H \to P_{\text{start}}, P_{\text{end}}$)**.
 
 ---
 
@@ -349,6 +382,23 @@ python pretrained_classification.py --freeze_encoder
 # 3. Mở Jupyter Notebook khảo sát tokenization hoặc fine-tuning:
 jupyter notebook tokenization.ipynb
 jupyter notebook fine_tuning.ipynb
+```
+
+#### Chạy Lab 9:
+```bash
+cd Lab9
+# 1. Chạy Baseline NER (Logistic Regression):
+python baseline_ner.py
+
+# 2. Chạy pipeline huấn luyện và đánh giá toàn diện mô hình Transformer:
+python train_ner.py
+
+# 3. Chạy pipeline Trích xuất thông tin (Information Extraction):
+python information_extraction.py
+
+# 4. Mở Jupyter Notebook khảo sát căn chỉnh tokenizer hoặc fine-tuning:
+jupyter notebook tokenizer_alignment.ipynb
+jupyter notebook ner_finetuning.ipynb
 ```
 
 
