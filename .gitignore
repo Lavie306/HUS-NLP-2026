@@ -219,4 +219,6 @@ __marimo__/
 
 # Large datasets & raw corpora
 /data/
+/models/
+/checkpoints/
 *.tar.gz
